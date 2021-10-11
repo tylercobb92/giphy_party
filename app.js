@@ -1,6 +1,17 @@
-console.log("Let's get this party started!");
 const $search = $('#searchTerm')
+const $gifSpace = $('.gifSpace')
 
+function appendGif(res) {
+    let numGifs = res.data.length;
+    if (numGifs) {
+        let randomGif = Math.floor(Math.random() * numGifs);
+        let $newGif = $('<img>', {
+            src: res.data[randomGif].images.original.url
+        })
+        $search.append($newGif);
+    }
+
+}
 
 $('form').on('submit', async function (e) {
     e.preventDefault();
@@ -11,8 +22,11 @@ $('form').on('submit', async function (e) {
     const response = await axios.get('https://api.giphy.com/v1/gifs/search', {
         params: {
             q: searchTerm,
-            api_key: 'lMBjWCtuNP1Iq5tXNAZLbnJP5QbSI09w'
+            api_key: 'lMBjWCtuNP1Iq5tXNAZLbnJP5QbSI09w',
         }
     });
-    console.log(response);
+    // console.log(response.data);
+    appendGif(response.data);
 })
+
+//response.data.data[0].images.original.url specifies the url of the first gif result returned by giphy api
