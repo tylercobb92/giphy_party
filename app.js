@@ -8,16 +8,14 @@ function appendGif(res) {
         let $newGif = $('<img>', {
             src: res.data[randomGif].images.original.url
         })
-        $search.append($newGif);
+        $gifSpace.append($newGif);
     }
-
 }
 
 $('form').on('submit', async function (e) {
     e.preventDefault();
 
     let searchTerm = $search.val();
-    $search.val('');
 
     const response = await axios.get('https://api.giphy.com/v1/gifs/search', {
         params: {
@@ -25,8 +23,10 @@ $('form').on('submit', async function (e) {
             api_key: 'lMBjWCtuNP1Iq5tXNAZLbnJP5QbSI09w',
         }
     });
-    // console.log(response.data);
+    console.log(response.data);
     appendGif(response.data);
+    $search.val('');
+
 })
 
 //response.data.data[0].images.original.url specifies the url of the first gif result returned by giphy api
