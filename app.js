@@ -30,5 +30,6 @@ $('form').on('submit', async function (e) {
 })
 
 $('#removeBtn').on('click', function () {
-    $gifSpace.empty()
+    $search.val('');
+    $gifSpace.empty();
 })
