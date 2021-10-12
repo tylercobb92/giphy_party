@@ -29,4 +29,6 @@ $('form').on('submit', async function (e) {
 
 })
 
-//response.data.data[0].images.original.url specifies the url of the first gif result returned by giphy api
+$('#removeBtn').on('click', function () {
+    $gifSpace.empty()
+})
